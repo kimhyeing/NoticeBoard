@@ -1,6 +1,5 @@
 package com.android.noticeboard.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.noticeboard.core.BaseViewModel
 import com.android.noticeboard.domain.entity.Post
@@ -17,21 +16,36 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val postRepository: PostRepository
 ): BaseViewModel() {
-    private val _posts = MutableStateFlow(emptyList<Post>())
-    val posts: StateFlow<List<Post>>
-        get() = _posts.asStateFlow()
+    private val _state = MutableStateFlow(State())
+    val state: StateFlow<State>
+        get() = _state.asStateFlow()
+
+    init {
+        getPosts()
+    }
 
     fun getPosts() {
         viewModelScope.launch {
+            startLoading()
             kotlin.runCatching {
                 postRepository.getPosts()
-            }.onSuccess { response ->
-                _posts.value = response
-                Timber.d("게시글 : $response")
+            }.onSuccess { posts ->
+                _state.value = _state.value.copy(
+                    isInitialized = true,
+                    posts = posts
+                )
+                Timber.d("success : $posts")
             }.onFailure { throwable ->
-                Timber.e("${throwable.message}")
+                Timber.e("error : ${throwable.message}")
+                _state.value = _state.value.copy(isInitialized = true)
                 sendErrorMessage(throwable)
             }
+            stopLoading()
         }
     }
+
+    data class State(
+        val isInitialized: Boolean = false,
+        val posts: List<Post> = emptyList()
+    )
 }
