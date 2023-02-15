@@ -11,19 +11,17 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_post"
-        android:paddingVertical="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".PostActivity">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="40dp"
             android:text="@{post.title}"
-            android:maxLines="2"
-            android:ellipsize="end"
             android:textColor="@color/title"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,27 +33,25 @@
             android:id="@+id/tv_body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="30dp"
             android:text="@{post.body}"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:textColor="@color/body_1"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_title"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user"
             tools:text="글내용" />
 
         <TextView
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="작성자"
             android:textColor="@color/body_2"
             android:textSize="11sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_body"
-            app:layout_constraintTop_toBottomOf="@+id/tv_body" />
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <TextView
             android:id="@+id/tv_user_id"
@@ -63,12 +59,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@{String.valueOf(post.userId)}"
-            android:textSize="11sp"
             android:textColor="@color/body_2"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_user"
             app:layout_constraintStart_toEndOf="@+id/tv_user"
             app:layout_constraintTop_toTopOf="@+id/tv_user"
-            tools:text="1"/>
+            tools:text="1" />
 
         <TextView
             android:id="@+id/tv_post_number"
@@ -76,8 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="글번호"
-            android:textSize="11sp"
             android:textColor="@color/body_2"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_user_id"
             app:layout_constraintStart_toEndOf="@+id/tv_user_id"
             app:layout_constraintTop_toTopOf="@+id/tv_user_id" />
@@ -88,11 +84,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@{String.valueOf(post.id)}"
-            android:textSize="11sp"
             android:textColor="@color/body_2"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_post_number"
             app:layout_constraintStart_toEndOf="@+id/tv_post_number"
             app:layout_constraintTop_toTopOf="@+id/tv_post_number"
-            tools:text="1"/>
+            tools:text="1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

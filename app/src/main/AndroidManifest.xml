@@ -27,6 +27,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.android.noticeboard.home.detail.PostActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

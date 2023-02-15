@@ -1,5 +1,6 @@
 package com.android.noticeboard.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import com.android.noticeboard.core.BaseActivity
 import com.android.noticeboard.domain.entity.Post
 import com.android.noticeboard.home.databinding.ActivityHomeBinding
+import com.android.noticeboard.home.detail.PostActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -54,6 +56,7 @@ class HomeActivity: BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     }
 
     private fun startPostDetailActivity(post: Post) {
-
+        val intent = PostActivity.intent(this, post)
+        startActivity(intent)
     }
 }
