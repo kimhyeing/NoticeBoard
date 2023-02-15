@@ -43,6 +43,10 @@ dependencies {
 
     implementation deps.timber
 
+    implementation deps.network.core
+    implementation deps.network.adapter
+    implementation deps.network.interceptor
+
     // testing
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
