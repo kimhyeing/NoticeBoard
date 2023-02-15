@@ -1,24 +1,20 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'kotlin-parcelize'
+    id "kotlin-kapt"
     id 'dagger.hilt.android.plugin'
 }
 
 android {
-    namespace 'com.android.noticeboard'
+    namespace 'com.android.noticeboard.home'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.android.noticeboard"
         minSdk 26
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -34,17 +30,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         dataBinding true
     }
 }
 
 dependencies {
-
-    //modules
     implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation(project(":presentation:home"))
+    implementation(project(":core"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
@@ -53,10 +47,8 @@ dependencies {
     kapt deps.hilt.compiler
 
     implementation deps.timber
-    implementation deps.gson
 
     // testing
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
-
 }
