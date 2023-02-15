@@ -3,6 +3,7 @@ package com.android.noticeboard.home.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import com.android.noticeboard.core.BaseActivity
 import com.android.noticeboard.core.extensions.getSerializableWithType
 import com.android.noticeboard.domain.entity.Post
@@ -13,8 +14,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PostActivity: BaseActivity<ActivityPostBinding>(R.layout.activity_post) {
 
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.onBackPressedDispatcher.addCallback(this, callback)
 
         initView()
     }
